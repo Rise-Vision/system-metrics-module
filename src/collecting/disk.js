@@ -11,7 +11,7 @@ const MEGABYTES = KILOBYTES * KILOBYTES
  * so we can change sync/async implementations if needed.
  * In windows this will be the free space for the player's drive; in
  * Linux this will be the free space for the player's filesystem.
- * @returns {number} Free disk space in bytes as an integer value.
+ * @returns {Promise} Free disk space in bytes as an integer value.
  */
 function readFreeSpaceInBytes() {
   return platform.getFreeDiskSpace()
@@ -20,7 +20,7 @@ function readFreeSpaceInBytes() {
 /**
  * Reads free disk space in megabytes.
  * @see readFreeSpaceInBytes
- * @returns {number} Free disk space in megabytes as an integer value.
+ * @returns {Promise} Free disk space in megabytes as an integer value.
  */
 function readFreeSpaceInMegaBytes() {
   return readFreeSpaceInBytes()
