@@ -8,11 +8,11 @@ const PERCENT = 100
  * @returns {number} Current CPU load as a 0 to 1 value that represents
  * overall CPU usage for the current Operating System.
  */
-function readSystemWideCurrentCPULoad() {
+function readSystemWideCurrentLoad() {
   return info.currentLoad()
   .then(data => data.currentload / PERCENT)
 }
 
 module.exports = {
-  readSystemWideCurrentCPULoad
+  readSystemWideCurrentLoad
 }
