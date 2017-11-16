@@ -1,5 +1,4 @@
-// currently common-display-module depends on rise-common-electron, this may change in the future to avoid electron dependencies.
-const {platform} = require("rise-common-electron")
+const {platform} = require("common-display-module")
 
 // sometimes disk metrics use 1000 instead of 1024, but common function uses 1024 so we stick to that
 const KILOBYTES = 1024
