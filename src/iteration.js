@@ -2,7 +2,7 @@ const metrics = require("./collecting/metrics")
 const storing = require("./storing/storing")
 
 /**
- * Perform a cycle of collecting and storing.
+ * Perform a single cycle of collecting and storing.
  * @returns {Promise} Signals that the execution has completed successfully
  * or not.
  */

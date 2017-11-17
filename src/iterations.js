@@ -5,20 +5,12 @@ const parameters = require("./parameters")
 
 let timerId = null
 
-/**
- * Collect the metrics, store them, and report any errors.
- * @returns {void}
- */
 function collectAndStoreMetrics() {
   iteration.collectAndStore()
   .catch(console.log)
   // should errors go to logging module ?
 }
 
-/**
- * Program the next iterations if an interval was set.
- * @returns {void}
- */
 function programNextIteration() {
   const interval = parameters.intervalBetweenReadings()
 
@@ -27,11 +19,6 @@ function programNextIteration() {
   }
 }
 
-/**
- * Start the metrics collection process. Performs a first collecting task,
- * and programs the next ones.
- * @returns {void}
- */
 function startCollectingMetrics() {
   collectAndStoreMetrics()
 
