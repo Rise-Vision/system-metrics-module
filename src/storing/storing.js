@@ -11,7 +11,6 @@ const BQ_PROJECT_NAME = "client-side-events"
 const BQ_DATASET = "System_Metrics_Events"
 const BQ_TABLE = "events"
 
-// what should I put here ?
 const FAILED_ENTRY_FILE = "sytem-metrics-failed.log"
 
 const logger = logging(BQ_PROJECT_NAME, BQ_DATASET, FAILED_ENTRY_FILE)

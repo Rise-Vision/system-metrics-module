@@ -65,7 +65,6 @@ describe("Iterations", ()=>
           assert.equal(data.projectName, "client-side-events")
           assert.equal(data.datasetName, "System_Metrics_Events")
           assert.equal(data.table, "events")
-          // is this correct ????
           assert.equal(data.failedEntryFile, "sytem-metrics-failed.log")
 
           // the BigQuery row entry, see design doc for individual element description
