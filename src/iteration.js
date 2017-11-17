@@ -7,8 +7,11 @@ const storing = require("./storing/storing")
  * or not.
  */
 function collectAndStore() {
+  console.log("-------------------")
   return metrics.read()
   .then(storing.send)
 }
 
-module.exports = {collectAndStore}
+module.exports = {
+  collectAndStore
+}
