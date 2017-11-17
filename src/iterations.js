@@ -20,8 +20,10 @@ function collectAndStoreMetrics() {
  * @returns {void}
  */
 function programNextIteration() {
-  if (parameters.interval() > 0) {
-    timerId = setInterval(collectAndStoreMetrics, parameters.interval())
+  const interval = parameters.intervalBetweenReadings()
+
+  if (interval > 0) {
+    timerId = setInterval(collectAndStoreMetrics, interval)
   }
 }
 
@@ -44,7 +46,7 @@ function execute() {
   // safety catch, stop any previous execution.
   stop()
 
-  const offset = parameters.offset()
+  const offset = parameters.delayForFirstMetric()
 
   setTimeout(startCollectingMetrics, offset)
 }

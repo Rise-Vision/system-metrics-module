@@ -22,9 +22,9 @@ describe("Iterations", ()=>
     simple.mock(common, "getDisplaySettings").returnWith(settings)
 
     // 0 offset, immediate execution
-    simple.mock(parameters, "offset").returnWith(0)
+    simple.mock(parameters, "delayForFirstMetric").returnWith(0)
     // 0 interval, do not repeat
-    simple.mock(parameters, "interval").returnWith(0)
+    simple.mock(parameters, "intervalBetweenReadings").returnWith(0)
 
     // watch invocation.
     simple.mock(iteration, "collectAndStore")
@@ -42,8 +42,8 @@ describe("Iterations", ()=>
   {
     iterations.execute()
 
-    assert.equal(parameters.offset(), 0)
-    assert.equal(parameters.interval(), 0)
+    assert.equal(parameters.delayForFirstMetric(), 0)
+    assert.equal(parameters.intervalBetweenReadings(), 0)
 
     function checkMetrics() {
       if (iteration.collectAndStore.called) {

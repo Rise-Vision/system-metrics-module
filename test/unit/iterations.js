@@ -48,9 +48,9 @@ describe("Iterations", ()=>
     it("should iterate 10 times with no offset", done =>
     {
       // 0 offset, no wait
-      simple.mock(parameters, "offset").returnWith(0)
+      simple.mock(parameters, "delayForFirstMetric").returnWith(0)
       // 100 interval, quick repeat
-      simple.mock(parameters, "interval").returnWith(100)
+      simple.mock(parameters, "intervalBetweenReadings").returnWith(100)
 
       iterations.execute()
 
@@ -71,9 +71,9 @@ describe("Iterations", ()=>
     it("should iterate 10 times with offset", done =>
     {
       // 10 offset, tiny wait
-      simple.mock(parameters, "offset").returnWith(10)
+      simple.mock(parameters, "delayForFirstMetric").returnWith(10)
       // 100 interval, quick repeat
-      simple.mock(parameters, "interval").returnWith(100)
+      simple.mock(parameters, "intervalBetweenReadings").returnWith(100)
 
       iterations.execute()
 
@@ -117,9 +117,9 @@ describe("Iterations", ()=>
     it("should collect a single time", done =>
     {
       // 0 offset, no wait
-      simple.mock(parameters, "offset").returnWith(0)
+      simple.mock(parameters, "delayForFirstMetric").returnWith(0)
       // 0 interval, no repeat
-      simple.mock(parameters, "interval").returnWith(0)
+      simple.mock(parameters, "intervalBetweenReadings").returnWith(0)
 
       iterations.execute()
 
