@@ -51,7 +51,7 @@ describe("Iteration", ()=>
 
       // the BigQuery row entry, see design doc for individual element description
       const row = data.data
-      assert.equal(row.event, "system_metrics")
+      assert.equal(row.event, "info")
       assert.equal(row.event_details, "")
       assert.equal(row.display_id, "DIS123")
       // ts will be inserted in logging module, so we won't be checking it here

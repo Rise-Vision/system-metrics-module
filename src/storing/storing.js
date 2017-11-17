@@ -4,7 +4,7 @@
 const common = require("common-display-module")
 const logging = require("common-display-module/external-logger")
 
-const EVENT_TYPE = "system_metrics"
+const EVENT_TYPE = "info"
 const MODULE_NAME = "system-metrics"
 
 const BQ_PROJECT_NAME = "client-side-events"
