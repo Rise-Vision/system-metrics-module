@@ -37,18 +37,16 @@ function startCollectingMetrics() {
 }
 
 /**
- *Iteration loop, programs first and subsequent executions.
+ * Iteration loop, programs first and subsequent executions.
  * @returns {void}
  */
 function execute() {
   // safety catch, stop any previous execution.
   stop()
 
-  if (parameters.offset() === 0) {
-    startCollectingMetrics()
-  } else {
-    setTimeout(startCollectingMetrics, parameters.offset())
-  }
+  const offset = parameters.offset()
+
+  setTimeout(startCollectingMetrics, offset)
 }
 
 function stop() {
