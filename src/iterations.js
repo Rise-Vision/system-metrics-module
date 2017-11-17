@@ -3,6 +3,8 @@
 const iteration = require("./iteration")
 const parameters = require("./parameters")
 
+let timerId = null
+
 /**
  * Collect the metrics, store them, and report any errors.
  * @returns {void}
@@ -19,7 +21,7 @@ function collectAndStoreMetrics() {
  */
 function programNextIteration() {
   if (parameters.interval() > 0) {
-    setInterval(collectAndStoreMetrics, parameters.interval())
+    timerId = setInterval(collectAndStoreMetrics, parameters.interval())
   }
 }
 
@@ -39,7 +41,9 @@ function startCollectingMetrics() {
  * @returns {void}
  */
 function execute() {
-  console.log(parameters.offset())
+  // safety catch, stop any previous execution.
+  stop()
+
   if (parameters.offset() === 0) {
     startCollectingMetrics()
   } else {
@@ -47,4 +51,12 @@ function execute() {
   }
 }
 
-module.exports = {execute}
+function stop() {
+  if (timerId) {
+    clearInterval(timerId)
+
+    timerId = null
+  }
+}
+
+module.exports = {execute, stop}

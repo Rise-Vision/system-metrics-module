@@ -7,7 +7,6 @@ const storing = require("./storing/storing")
  * or not.
  */
 function collectAndStore() {
-  console.log("-------------------")
   return metrics.read()
   .then(storing.send)
 }

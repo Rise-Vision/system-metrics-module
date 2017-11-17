@@ -91,6 +91,12 @@ describe("Iterations", ()=>
 
       done()
     })
+    .catch(error =>
+    {
+      assert.fail(error)
+
+      done()
+    })
   })
 
 })
