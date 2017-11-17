@@ -11,14 +11,18 @@ const DEFAULT_INTERVAL = 30
  * @returns {number} milliseconds offset time for the first metric
  */
 function offset() {
-  return DEFAULT_OFFSET * MINUTES
+  const value = Number(process.env.OFFSET || DEFAULT_OFFSET)
+
+  return value * MINUTES
 }
 
 /**
  * @returns {number} milliseconds interval between readings
  */
 function interval() {
-  return DEFAULT_INTERVAL * MINUTES
+  const value = Number(process.env.INTERVAL || DEFAULT_INTERVAL)
+
+  return value * MINUTES
 }
 
 module.exports = {interval, offset}

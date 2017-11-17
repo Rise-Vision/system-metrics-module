@@ -63,7 +63,7 @@ describe("Iterations", ()=>
       assert.equal(event.topic, "log")
 
       const data = event.data
-      assert.equal(data.projectName, "system-metrics")
+      assert.equal(data.projectName, "client-side-events")
       assert.equal(data.datasetName, "System_Metrics_Events")
       assert.equal(data.table, "events")
       // is this correct ????

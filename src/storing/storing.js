@@ -6,13 +6,15 @@ const logging = require("common-display-module/external-logger")
 
 const EVENT_TYPE = "system_metrics"
 const MODULE_NAME = "system-metrics"
-const DATASET = "System_Metrics_Events"
-const TABLE = "events"
+
+const BQ_PROJECT_NAME = "client-side-events"
+const BQ_DATASET = "System_Metrics_Events"
+const BQ_TABLE = "events"
 
 // what should I put here ?
 const FAILED_ENTRY_FILE = "sytem-metrics-failed.log"
 
-const logger = logging(MODULE_NAME, DATASET, FAILED_ENTRY_FILE)
+const logger = logging(BQ_PROJECT_NAME, BQ_DATASET, FAILED_ENTRY_FILE)
 
 // display id
 let displayId = null
@@ -51,7 +53,7 @@ function send(metrics) {
     "display_id": displayId
   })
 
-  logger.log(EVENT_TYPE, detail, TABLE, MODULE_NAME)
+  logger.log(EVENT_TYPE, detail, BQ_TABLE, MODULE_NAME)
 }
 
 module.exports = {init, send}
