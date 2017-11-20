@@ -10,7 +10,7 @@ const DEFAULT_INTERVAL = 30
 const MODULE_NAME = "system-metrics"
 
 /**
- * Can be set vía environment variable OFFSET. 0 means no delay.
+ * Can be set via environment variable OFFSET. 0 means no delay.
  * @returns {number} milliseconds
  */
 function delayForFirstMetric() {
@@ -20,7 +20,7 @@ function delayForFirstMetric() {
 }
 
 /**
- * Can be set vía environment variable INTERVAL. 0 means no additional
+ * Can be set via environment variable INTERVAL. 0 means no additional
  * readings are desired ( just the initial one )
  * @returns {number} milliseconds
  */
