@@ -32,10 +32,10 @@ function detailsFor(eventDetails, data) {
     throw new Error('Display ID not initialized. Perhaps loadDisplaySettings() method was not called ?')
   }
 
-  return Object.assign({}, data, {
+  return Object.assign({
     "event_details": eventDetails,
     "display_id": displayId
-  })
+  }, data)
 }
 
 function error(eventDetails, userFriendlyMessage) {
