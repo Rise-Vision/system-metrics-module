@@ -4,10 +4,10 @@ const assert = require("assert")
 const common = require("common-display-module")
 const simple = require("simple-mock")
 
+const ipc = require("../../src/ipc")
 const iteration = require("../../src/iteration")
 const iterations = require("../../src/iterations")
 const parameters = require("../../src/parameters")
-const storing = require("../../src/storing/storing")
 
 describe("Iterations", ()=>
 {
@@ -29,8 +29,7 @@ describe("Iterations", ()=>
     // watch invocation.
     simple.mock(iteration, "collectAndStore")
 
-    // Set up IPC connection
-    storing.init().then(() => done())
+    ipc.connect().then(() => done())
   })
 
   afterEach(()=>
@@ -69,7 +68,7 @@ describe("Iterations", ()=>
 
           // the BigQuery row entry, see design doc for individual element description
           const row = data.data
-          assert.equal(row.event, "info")
+          assert.equal(row.event, "data")
           assert.equal(row.event_details, "")
           assert.equal(row.display_id, "DIS123")
           // ts will be inserted in logging module, so we won't be checking it here
