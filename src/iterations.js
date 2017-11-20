@@ -14,7 +14,14 @@ function collectAndStoreMetrics() {
   {
     const detail = error.message || JSON.stringify(error)
 
-    ipc.sendMessage(ERROR_TYPE, detail, {})
+    try {
+      ipc.sendMessage(ERROR_TYPE, detail, {})
+    }
+    catch (ipcError) {
+      // IPC logging failed, log to console
+      console.error(detail)
+      console.error(ipcError)
+    }
   })
 }
 
