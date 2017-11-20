@@ -7,7 +7,7 @@ const iteration = require("../../src/iteration")
 const iterations = require("../../src/iterations")
 const parameters = require("../../src/parameters")
 
-describe("Iterations", ()=>
+describe("Unit Iterations", ()=>
 {
 
   const completed = Promise.resolve(true)

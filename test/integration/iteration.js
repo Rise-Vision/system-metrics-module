@@ -7,7 +7,7 @@ const simple = require("simple-mock")
 const ipc = require("../../src/ipc")
 const iteration = require("../../src/iteration")
 
-describe("Iteration", ()=>
+describe("Integration Iteration", ()=>
 {
 
   beforeEach(done=>
@@ -46,7 +46,7 @@ describe("Iteration", ()=>
       assert.equal(data.projectName, "client-side-events")
       assert.equal(data.datasetName, "System_Metrics_Events")
       assert.equal(data.table, "events")
-      assert.equal(data.failedEntryFile, "sytem-metrics-failed.log")
+      assert.equal(data.failedEntryFile, "system-metrics-failed.log")
 
       // the BigQuery row entry, see design doc for individual element description
       const row = data.data

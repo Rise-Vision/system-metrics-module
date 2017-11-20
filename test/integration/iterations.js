@@ -9,7 +9,7 @@ const iteration = require("../../src/iteration")
 const iterations = require("../../src/iterations")
 const parameters = require("../../src/parameters")
 
-describe("Iterations", ()=>
+describe("Integration Iterations", ()=>
 {
 
   beforeEach(done=>
@@ -64,7 +64,7 @@ describe("Iterations", ()=>
           assert.equal(data.projectName, "client-side-events")
           assert.equal(data.datasetName, "System_Metrics_Events")
           assert.equal(data.table, "events")
-          assert.equal(data.failedEntryFile, "sytem-metrics-failed.log")
+          assert.equal(data.failedEntryFile, "system-metrics-failed.log")
 
           // the BigQuery row entry, see design doc for individual element description
           const row = data.data
@@ -135,7 +135,7 @@ describe("Iterations", ()=>
           assert.equal(data.projectName, "client-side-events")
           assert.equal(data.datasetName, "System_Metrics_Events")
           assert.equal(data.table, "events")
-          assert.equal(data.failedEntryFile, "sytem-metrics-failed.log")
+          assert.equal(data.failedEntryFile, "system-metrics-failed.log")
 
           // the BigQuery row entry, see design doc for individual element description
           const row = data.data

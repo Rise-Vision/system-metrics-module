@@ -5,6 +5,11 @@ const DEFAULT_OFFSET = 5
 const DEFAULT_INTERVAL = 30
 
 /**
+ * Single definition for this module's name.
+ */
+const MODULE_NAME = "system-metrics"
+
+/**
  * Can be set vía environment variable OFFSET. 0 means no delay.
  * @returns {number} milliseconds
  */
@@ -25,4 +30,8 @@ function intervalBetweenReadings() {
   return value * MINUTES
 }
 
-module.exports = {delayForFirstMetric, intervalBetweenReadings}
+function moduleName() {
+  return MODULE_NAME
+}
+
+module.exports = {delayForFirstMetric, intervalBetweenReadings, moduleName}

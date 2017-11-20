@@ -1,9 +1,7 @@
 // Iteration loop, separated to facilitate integration tests
 
-const ERROR_TYPE = "error"
-
-const ipc = require("./ipc")
 const iteration = require("./iteration")
+const logging = require("./logging")
 const parameters = require("./parameters")
 
 let timerId = null
@@ -14,14 +12,7 @@ function collectAndStoreMetrics() {
   {
     const detail = error.message || JSON.stringify(error)
 
-    try {
-      ipc.sendMessage(ERROR_TYPE, detail, {})
-    }
-    catch (ipcError) {
-      // IPC logging failed, log to console
-      console.error(detail)
-      console.error(ipcError)
-    }
+    logging.error(detail, "Error while collecting metrics.")
   })
 }
 
