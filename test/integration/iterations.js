@@ -49,7 +49,7 @@ describe("Integration Iterations", ()=>
         const promise = iteration.collectAndStore.lastCall.returned
 
         promise.then(()=>{
-          // should have resulted in a ca1ll to logging module
+          // should have resulted in a call to logging module
           assert(common.broadcastMessage.called)
 
           // this is the actual event object sent to the logging module
@@ -120,7 +120,7 @@ describe("Integration Iterations", ()=>
         // must have returned with a failure
         promise.catch(() =>
         {
-          // should have resulted in a ca1ll to logging module
+          // should have resulted in a call to logging module
           assert(common.broadcastMessage.called)
 
           // this is the actual event object sent to the logging module
