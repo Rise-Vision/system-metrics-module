@@ -3,9 +3,11 @@
 const assert = require("assert")
 const common = require("common-display-module")
 const simple = require("simple-mock")
-const storing = require("../../../src/storing/storing")
 
-describe("Storing", ()=>
+const ipc = require("../../src/ipc")
+const logging = require("../../src/logging")
+
+describe("Unit Logging", ()=>
 {
 
   beforeEach(done=>
@@ -17,8 +19,7 @@ describe("Storing", ()=>
     simple.mock(common, "connect").returnWith(connection)
     simple.mock(common, "getDisplaySettings").returnWith(settings)
 
-    // Set up IPC connection
-    storing.init().then(() => done())
+    ipc.connect().then(() => done())
   })
 
   afterEach(()=>
@@ -32,7 +33,7 @@ describe("Storing", ()=>
       "cpu_usage": 0.4, "free_disk": 400, "memory_usage": 0.2
     }
 
-    storing.send(sampleMetrics)
+    logging.sendMetrics(sampleMetrics)
 
     // should have resulted in a call to logging module
     assert(common.broadcastMessage.called)
@@ -49,12 +50,11 @@ describe("Storing", ()=>
     assert.equal(data.projectName, "client-side-events")
     assert.equal(data.datasetName, "System_Metrics_Events")
     assert.equal(data.table, "events")
-    // is this correct ????
-    assert.equal(data.failedEntryFile, "sytem-metrics-failed.log")
+    assert.equal(data.failedEntryFile, "system-metrics-failed.log")
 
     // the BigQuery row entry, see design doc for individual element description
     const row = data.data
-    assert.equal(row.event, "system_metrics")
+    assert.equal(row.event, "data")
     assert.equal(row.event_details, "")
     assert.equal(row.display_id, "DIS123")
     // ts will be inserted in logging module, so we won't be checking it here

@@ -1,6 +1,6 @@
-const storing = require("./storing/storing")
+const ipc = require("./ipc")
 const iterations = require("./iterations")
 
-// main module loop, the IPC connection is created, and iterations programmed
-storing.init()
+// main module loop
+ipc.connect()
 .then(iterations.execute)

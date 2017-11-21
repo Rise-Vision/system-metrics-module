@@ -1,28 +1,37 @@
 // Common parameters for this module. Test environments may mock these to better suited ones.
 
-// 60 * 1000
 const MINUTES = 60000
-
-// Default values.
 const DEFAULT_OFFSET = 5
 const DEFAULT_INTERVAL = 30
 
 /**
- * @returns {number} milliseconds offset time for the first metric
+ * Single definition for this module's name.
  */
-function offset() {
+const MODULE_NAME = "system-metrics"
+
+/**
+ * Can be set via environment variable OFFSET. 0 means no delay.
+ * @returns {number} milliseconds
+ */
+function delayForFirstMetric() {
   const value = Number(process.env.OFFSET || DEFAULT_OFFSET)
 
   return value * MINUTES
 }
 
 /**
- * @returns {number} milliseconds interval between readings
+ * Can be set via environment variable INTERVAL. 0 means no additional
+ * readings are desired ( just the initial one )
+ * @returns {number} milliseconds
  */
-function interval() {
+function intervalBetweenReadings() {
   const value = Number(process.env.INTERVAL || DEFAULT_INTERVAL)
 
   return value * MINUTES
 }
 
-module.exports = {interval, offset}
+function moduleName() {
+  return MODULE_NAME
+}
+
+module.exports = {delayForFirstMetric, intervalBetweenReadings, moduleName}
