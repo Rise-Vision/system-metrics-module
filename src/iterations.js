@@ -16,18 +16,16 @@ function collectAndStoreMetrics() {
   })
 }
 
-function programNextIteration() {
+function startCollectingMetrics() {
+  // first iteration
+  collectAndStoreMetrics()
+
   const interval = parameters.intervalBetweenReadings()
 
+  // next iterations
   if (interval > 0) {
     timerId = setInterval(collectAndStoreMetrics, interval)
   }
-}
-
-function startCollectingMetrics() {
-  collectAndStoreMetrics()
-
-  programNextIteration()
 }
 
 /**
