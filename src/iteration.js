@@ -1,5 +1,5 @@
 const metrics = require("./collecting/metrics")
-const storing = require("./storing/storing")
+const logging = require("./logging")
 
 /**
  * Perform a single cycle of collecting and storing.
@@ -8,7 +8,7 @@ const storing = require("./storing/storing")
  */
 function collectAndStore() {
   return metrics.read()
-  .then(storing.send)
+  .then(logging.sendMetrics)
 }
 
 module.exports = {

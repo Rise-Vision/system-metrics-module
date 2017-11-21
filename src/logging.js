@@ -11,6 +11,12 @@ const FAILED_ENTRY_FILE = "system-metrics-failed.log"
 const externalLogger = require("common-display-module/external-logger")(BQ_PROJECT_NAME, BQ_DATASET, FAILED_ENTRY_FILE)
 const logger = require("rise-common-electron/logger")(externalLogger, logFolder, moduleName)
 
+/**
+ * This is the type of event that will be used for storing metrics in BQ,
+ * so it won't confuse with other logging events ( error, info, etc. )
+ */
+const DATA_EVENT_TYPE = "data"
+
 let displayId = null
 
 function loadDisplaySettings() {
@@ -50,4 +56,13 @@ function send(eventType, eventDetails, data) {
   logger.external(eventType, detail, BQ_TABLE)
 }
 
-module.exports = {error, loadDisplaySettings, send}
+/**
+ * @param {Object} metrics - The object with the required metrics as described
+ * in the design document.
+ * @return {void}
+ */
+function sendMetrics(metrics) {
+  send(DATA_EVENT_TYPE, "", metrics)
+}
+
+module.exports = {error, loadDisplaySettings, send, sendMetrics}
