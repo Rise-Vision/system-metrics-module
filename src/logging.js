@@ -5,11 +5,11 @@ const BQ_PROJECT_NAME = "client-side-events"
 const BQ_DATASET = "System_Metrics_Events"
 const BQ_TABLE = "events"
 
-const LOG_FOLDER = "logs"
+const logFolder = common.getModulePath(moduleName)
 const FAILED_ENTRY_FILE = "system-metrics-failed.log"
 
 const externalLogger = require("common-display-module/external-logger")(BQ_PROJECT_NAME, BQ_DATASET, FAILED_ENTRY_FILE)
-const logger = require("rise-common-electron/logger")(externalLogger, LOG_FOLDER, moduleName)
+const logger = require("rise-common-electron/logger")(externalLogger, logFolder, moduleName)
 
 let displayId = null
 
