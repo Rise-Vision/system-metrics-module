@@ -12,7 +12,7 @@ module.exports = env =>  {
     target: "node",
     externals: [nodeExternals()],
     output: {
-      path: path.join(__dirname, "build", "system-metrics-module", env.MODULE_VERSION),
+      path: path.join(__dirname, "build", "system-metrics-module"),
       filename: "index.js"
     },
     plugins: [
