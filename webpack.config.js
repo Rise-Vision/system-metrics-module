@@ -12,7 +12,7 @@ module.exports = env =>  {
     target: "node",
     externals: [nodeExternals()],
     output: {
-      path: path.join(__dirname, "build", "system-metrics-module"),
+      path: path.join(__dirname, "build", "system-metrics"),
       filename: "index.js"
     },
     plugins: [
@@ -23,11 +23,11 @@ module.exports = env =>  {
       new MinifyPlugin(),
       new ZipPlugin({
         path: path.join(__dirname, "build"),
-        filename: "system-metrics-module"
+        filename: "system-metrics"
       }),
       new UnzipsfxPlugin({
         outputPath: path.join(__dirname, "build"),
-        outputFilename: "system-metrics-module"
+        outputFilename: "system-metrics"
       })
     ]
   }
