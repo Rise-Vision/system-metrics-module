@@ -4,7 +4,7 @@
   "description": "System metrics module",
   "main": "src/index.js",
   "scripts": {
-    "build": "eslint src && ./pre-build.sh && webpack --env.MODULE_VERSION=$(cat version) --config webpack.config.js && ./post-build.sh",
+    "build": "eslint src && ./pre-build.sh && webpack --config webpack.config.js && ./post-build.sh",
     "test": "eslint test && eslint src && mocha -r test/mocha-env.js -t 20000 --recursive test/**",
     "test-integration": "eslint test && eslint src && mocha -r test/mocha-env.js -t 20000 --recursive test/integration/**",
     "test-unit": "eslint test && eslint src && mocha -r test/mocha-env.js -t 20000 --recursive test/unit/**"
@@ -37,8 +37,8 @@
     "zip-webpack-plugin": "^2.0.0"
   },
   "dependencies": {
-    "common-display-module": "git://github.com/Rise-Vision/common-display-module.git#v1.5.2",
-    "rise-common-electron": "git://github.com/Rise-Vision/rise-common-electron.git#v2.2.3",
+    "common-display-module": "git://github.com/Rise-Vision/common-display-module.git#v2.2.0",
+    "rise-common-electron": "git://github.com/Rise-Vision/rise-common-electron.git#v2.2.5",
     "systeminformation": "^3.33.5"
   }
 }
