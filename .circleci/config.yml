@@ -41,7 +41,16 @@ jobs:
         - checkout
         - attach_workspace:
             at: .
-        - run: ./stage.sh
+        - run:  npm install common-display-module
+        - run:
+            name: Stage
+            command: node_modules/common-display-module/stage.sh
+            environment:
+              MODULENAME: system-metrics
+        - persist_to_workspace:
+            root: .
+            paths:
+              - version
 
   "deploy-beta":
     docker: *DOCKERIMAGE
