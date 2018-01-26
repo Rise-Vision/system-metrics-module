@@ -23,72 +23,41 @@ describe("Collecting - Unit", ()=>
     assert(value >= 0, "Free disk space should be greater or equal than 0")
   }
 
-  it("should read memory usage", done =>
+  it("should read memory usage", () =>
   {
-    memory.readSystemWideUsage()
+    return memory.readSystemWideUsage()
     .then(value =>
     {
       validateMemoryUsage(value)
-      done()
-    })
-    .catch(error =>
-    {
-      assert.fail(error)
-
-      done()
     })
   })
 
-  it("should read current CPU load", done =>
+  it("should read current CPU load", () =>
   {
-    cpu.readSystemWideCurrentLoad()
+    return cpu.readSystemWideCurrentLoad()
     .then(value =>
     {
       validateCpuUsage(value)
-
-      done()
-    })
-    .catch(error =>
-    {
-      assert.fail(error)
-
-      done()
     })
   })
 
-  it("should read free disk space", done =>
+  it("should read free disk space", () =>
   {
-    disk.readFreeSpaceInMegaBytes()
+    return disk.readFreeSpaceInMegaBytes()
     .then(value =>
     {
       validateFreeDisk(value)
-
-      done()
-    })
-    .catch(error =>
-    {
-      assert.fail(error)
-
-      done()
     })
   })
 
-  it("should read all metrics and return them as a single object", done =>
+  it("should read all metrics and return them as a single object", () =>
   {
-    metrics.read()
+    return metrics.read()
     .then(entry =>
     {
       validateMemoryUsage(entry.memory_usage)
       validateCpuUsage(entry.cpu_usage)
       validateFreeDisk(entry.free_disk)
-
-      done()
-    })
-    .catch(error =>
-    {
-      assert.fail(error)
-
-      done()
     })
   })
 

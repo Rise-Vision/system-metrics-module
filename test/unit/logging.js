@@ -11,7 +11,7 @@ const logging = require("../../src/logging")
 describe("Logging - Unit", ()=>
 {
 
-  beforeEach(done=>
+  beforeEach(() =>
   {
     const connection = Promise.resolve({})
     const settings = Promise.resolve({displayid: "DIS123"})
@@ -20,7 +20,7 @@ describe("Logging - Unit", ()=>
     simple.mock(messaging, "connect").returnWith(connection)
     simple.mock(common, "getDisplaySettings").returnWith(settings)
 
-    ipc.connect().then(() => done())
+    return ipc.connect()
   })
 
   afterEach(()=>

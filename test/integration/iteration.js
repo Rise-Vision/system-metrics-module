@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 /* eslint-disable max-statements */
-const assert = require("assert")
+const assert = require("assert");
 const common = require("common-display-module")
 const messaging = require("common-display-module/messaging")
 const simple = require("simple-mock")
@@ -11,7 +11,7 @@ const iteration = require("../../src/iteration")
 describe("Iteration - Integration", ()=>
 {
 
-  beforeEach(done=>
+  beforeEach(() =>
   {
     const connection = Promise.resolve({})
     const settings = Promise.resolve({displayid: "DIS123"})
@@ -21,7 +21,7 @@ describe("Iteration - Integration", ()=>
     simple.mock(common, "getDisplaySettings").returnWith(settings)
 
     // Set up IPC connection
-    ipc.connect().then(() => done())
+    return ipc.connect()
   })
 
   afterEach(()=>
@@ -29,9 +29,9 @@ describe("Iteration - Integration", ()=>
     simple.restore()
   })
 
-  it("should collect and send metrics data to logging module", done =>
+  it("should collect and send metrics data to logging module", () =>
   {
-    iteration.collectAndStore().then(()=>{
+    return iteration.collectAndStore().then(()=>{
       // should have resulted in a call to logging module
       assert(messaging.broadcastMessage.called)
 
@@ -68,8 +68,6 @@ describe("Iteration - Integration", ()=>
       const memoryUsage = row.memory_usage
       assert(memoryUsage > 0, "Memory usage should be greater than 0")
       assert(memoryUsage <= 1, "Memory usage should be less or equal than 1")
-
-      done()
     })
   })
 

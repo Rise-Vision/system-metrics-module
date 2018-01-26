@@ -13,7 +13,7 @@ const parameters = require("../../src/parameters")
 describe("Iterations - Integration", ()=>
 {
 
-  beforeEach(done=>
+  beforeEach(()=>
   {
     const connection = Promise.resolve({})
     const settings = Promise.resolve({displayid: "DIS123"})
@@ -27,7 +27,7 @@ describe("Iterations - Integration", ()=>
     // 0 interval, do not repeat
     simple.mock(parameters, "intervalBetweenReadings").returnWith(0)
 
-    ipc.connect().then(() => done())
+    return ipc.connect()
   })
 
   afterEach(()=>
