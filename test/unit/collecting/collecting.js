@@ -6,7 +6,7 @@ const cpu = require("../../../src/collecting/cpu")
 const disk = require("../../../src/collecting/disk")
 const memory = require("../../../src/collecting/memory")
 
-describe("Unit Collecting", ()=>
+describe("Collecting - Unit", ()=>
 {
 
   function validateMemoryUsage(value) {

@@ -2,12 +2,13 @@
 /* eslint-disable max-statements */
 const assert = require("assert")
 const common = require("common-display-module")
+const messaging = require("common-display-module/messaging")
 const simple = require("simple-mock")
 
 const ipc = require("../../src/ipc")
 const logging = require("../../src/logging")
 
-describe("Unit Logging", ()=>
+describe("Logging - Unit", ()=>
 {
 
   beforeEach(done=>
@@ -15,8 +16,8 @@ describe("Unit Logging", ()=>
     const connection = Promise.resolve({})
     const settings = Promise.resolve({displayid: "DIS123"})
 
-    simple.mock(common, "broadcastMessage").returnWith()
-    simple.mock(common, "connect").returnWith(connection)
+    simple.mock(messaging, "broadcastMessage").returnWith()
+    simple.mock(messaging, "connect").returnWith(connection)
     simple.mock(common, "getDisplaySettings").returnWith(settings)
 
     ipc.connect().then(() => done())
@@ -36,10 +37,10 @@ describe("Unit Logging", ()=>
     logging.sendMetrics(sampleMetrics)
 
     // should have resulted in a call to logging module
-    assert(common.broadcastMessage.called)
+    assert(messaging.broadcastMessage.called)
 
     // this is the actual event object sent to the logging module
-    const event = common.broadcastMessage.lastCall.args[0]
+    const event = messaging.broadcastMessage.lastCall.args[0]
 
     // I sent the event
     assert.equal(event.from, "system-metrics")
