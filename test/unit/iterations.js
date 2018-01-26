@@ -7,7 +7,7 @@ const iteration = require("../../src/iteration")
 const iterations = require("../../src/iterations")
 const parameters = require("../../src/parameters")
 
-describe("Unit Iterations", ()=>
+describe("Iterations - Unit", () =>
 {
 
   const completed = Promise.resolve(true)
@@ -22,7 +22,7 @@ describe("Unit Iterations", ()=>
     promise = null
   })
 
-  describe("Multiple iterations", ()=>
+  describe("Multiple iterations", () =>
   {
 
     beforeEach(()=>
@@ -45,7 +45,7 @@ describe("Unit Iterations", ()=>
       })
     })
 
-    it("should iterate 10 times with no offset", done =>
+    it("should iterate 10 times with no offset", () =>
     {
       // 0 offset, no wait
       simple.mock(parameters, "delayForFirstMetric").returnWith(0)
@@ -54,21 +54,13 @@ describe("Unit Iterations", ()=>
 
       iterations.execute()
 
-      promise.then(() =>
+      return promise.then(() =>
       {
         assert(counter >= 10)
-
-        done()
-      })
-      .catch(error =>
-      {
-        assert.fail(error)
-
-        done()
       })
     })
 
-    it("should iterate 10 times with offset", done =>
+    it("should iterate 10 times with offset", () =>
     {
       // 10 offset, tiny wait
       simple.mock(parameters, "delayForFirstMetric").returnWith(10)
@@ -77,24 +69,16 @@ describe("Unit Iterations", ()=>
 
       iterations.execute()
 
-      promise.then(() =>
+      return promise.then(() =>
       {
         assert(counter >= 10)
-
-        done()
-      })
-      .catch(error =>
-      {
-        assert.fail(error)
-
-        done()
       })
     })
 
   })
 
   // This is used on integration tests, not at runtime.
-  describe("Single iteration", ()=>
+  describe("Single iteration", () =>
   {
 
     beforeEach(()=>
@@ -114,7 +98,7 @@ describe("Unit Iterations", ()=>
       })
     })
 
-    it("should collect a single time", done =>
+    it("should collect a single time", () =>
     {
       // 0 offset, no wait
       simple.mock(parameters, "delayForFirstMetric").returnWith(0)
@@ -123,17 +107,9 @@ describe("Unit Iterations", ()=>
 
       iterations.execute()
 
-      promise.then(() =>
+      return promise.then(() =>
       {
         assert.equal(counter, 1)
-
-        done()
-      })
-      .catch(error =>
-      {
-        assert.fail(error)
-
-        done()
       })
     })
 

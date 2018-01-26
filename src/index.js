@@ -6,4 +6,4 @@ const moduleName = require("./parameters").moduleName();
 // main module loop
 ipc.connect()
 .then(iterations.execute)
-.then(heartbeat.startHearbeatInterval(moduleName));
+.then(heartbeat.startHeartbeatInterval(moduleName));

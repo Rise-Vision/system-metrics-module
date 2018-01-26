@@ -1,26 +1,27 @@
 /* eslint-env mocha */
 /* eslint-disable max-statements */
-const assert = require("assert")
+const assert = require("assert");
 const common = require("common-display-module")
+const messaging = require("common-display-module/messaging")
 const simple = require("simple-mock")
 
 const ipc = require("../../src/ipc")
 const iteration = require("../../src/iteration")
 
-describe("Integration Iteration", ()=>
+describe("Iteration - Integration", ()=>
 {
 
-  beforeEach(done=>
+  beforeEach(() =>
   {
     const connection = Promise.resolve({})
     const settings = Promise.resolve({displayid: "DIS123"})
 
-    simple.mock(common, "broadcastMessage").returnWith()
-    simple.mock(common, "connect").returnWith(connection)
+    simple.mock(messaging, "broadcastMessage").returnWith()
+    simple.mock(messaging, "connect").returnWith(connection)
     simple.mock(common, "getDisplaySettings").returnWith(settings)
 
     // Set up IPC connection
-    ipc.connect().then(() => done())
+    return ipc.connect()
   })
 
   afterEach(()=>
@@ -28,14 +29,14 @@ describe("Integration Iteration", ()=>
     simple.restore()
   })
 
-  it("should collect and send metrics data to logging module", done =>
+  it("should collect and send metrics data to logging module", () =>
   {
-    iteration.collectAndStore().then(()=>{
+    return iteration.collectAndStore().then(()=>{
       // should have resulted in a call to logging module
-      assert(common.broadcastMessage.called)
+      assert(messaging.broadcastMessage.called)
 
       // this is the actual event object sent to the logging module
-      const event = common.broadcastMessage.lastCall.args[0]
+      const event = messaging.broadcastMessage.lastCall.args[0]
 
       // I sent the event
       assert.equal(event.from, "system-metrics")
@@ -67,8 +68,6 @@ describe("Integration Iteration", ()=>
       const memoryUsage = row.memory_usage
       assert(memoryUsage > 0, "Memory usage should be greater than 0")
       assert(memoryUsage <= 1, "Memory usage should be less or equal than 1")
-
-      done()
     })
   })
 
