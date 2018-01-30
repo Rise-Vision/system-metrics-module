@@ -47,13 +47,19 @@ function detailsFor(eventDetails, data) {
 function error(eventDetails, userFriendlyMessage) {
   const detail = detailsFor(eventDetails, {})
 
-  logger.error(detail, userFriendlyMessage, BQ_TABLE)
+  return logger.error(detail, userFriendlyMessage, BQ_TABLE)
+}
+
+function all(eventType, eventDetails = "", data = {}) {
+  const detail = detailsFor(eventDetails, data);
+
+  return logger.all(eventType, detail, null, BQ_TABLE);
 }
 
 function send(eventType, eventDetails, data) {
   const detail = detailsFor(eventDetails, data)
 
-  logger.external(eventType, detail, BQ_TABLE)
+  return logger.external(eventType, detail, BQ_TABLE)
 }
 
 /**
@@ -65,4 +71,4 @@ function sendMetrics(metrics) {
   send(DATA_EVENT_TYPE, "", metrics)
 }
 
-module.exports = {error, loadDisplaySettings, send, sendMetrics}
+module.exports = {all, error, loadDisplaySettings, send, sendMetrics}
