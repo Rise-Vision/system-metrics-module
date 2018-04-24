@@ -8,28 +8,26 @@ const simple = require("simple-mock")
 const ipc = require("../../src/ipc")
 const logging = require("../../src/logging")
 
-describe("Logging - Unit", ()=>
-{
+describe("Logging - Unit", ()=> {
+  const versionMock = "2018.01.01.01.01";
 
-  beforeEach(() =>
-  {
+  beforeEach(() => {
     const connection = Promise.resolve({})
     const settings = Promise.resolve({displayid: "DIS123"})
 
     simple.mock(messaging, "broadcastMessage").returnWith()
     simple.mock(messaging, "connect").returnWith(connection)
     simple.mock(common, "getDisplaySettings").returnWith(settings)
+    simple.mock(common, "getModuleVersion").returnWith(versionMock)
 
     return ipc.connect()
   })
 
-  afterEach(()=>
-  {
+  afterEach(()=> {
     simple.restore()
   })
 
-  it("should send metrics to logging module", () =>
-  {
+  it("should send metrics to logging module", () => {
     const sampleMetrics = {
       "cpu_usage": 0.4, "free_disk": 400, "memory_usage": 0.2
     }
@@ -58,6 +56,7 @@ describe("Logging - Unit", ()=>
     assert.equal(row.event, "data")
     assert.equal(row.event_details, "")
     assert.equal(row.display_id, "DIS123")
+    assert.equal(row.version, versionMock)
     // ts will be inserted in logging module, so we won't be checking it here
 
     // now we check that custom values were sent correctly
@@ -65,5 +64,4 @@ describe("Logging - Unit", ()=>
     assert.equal(row.free_disk, sampleMetrics.free_disk)
     assert.equal(row.memory_usage, sampleMetrics.memory_usage)
   })
-
 })

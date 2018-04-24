@@ -17,12 +17,14 @@ const logger = require("rise-common-electron/logger")(externalLogger, logFolder,
  */
 const DATA_EVENT_TYPE = "data"
 
-let displayId = null
+let displayId = null;
+let version = null;
 
 function loadDisplaySettings() {
+  version = common.getModuleVersion(moduleName);
+
   return common.getDisplaySettings()
-  .then(settings =>
-  {
+  .then(settings => {
     displayId = settings.displayid || settings.tempdisplayid
 
     if (displayId === null) {
@@ -40,7 +42,8 @@ function detailsFor(eventDetails, data) {
 
   return Object.assign({
     "event_details": eventDetails,
-    "display_id": displayId
+    "display_id": displayId,
+    version
   }, data)
 }
 
